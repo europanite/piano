@@ -62,9 +62,10 @@ jobs:
         run: npm ci
       - name: Build (expo export -p web)
         working-directory: frontend/app
-        run: npx expo export -p web
+        run: npx expo export --platform web
+      - name: Verify dist
+        run: test -f frontend/app/dist/index.html
       - name: Upload dist (preview artifact)
-        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: expo-web-dist
